@@ -13,11 +13,7 @@ export class AppComponent {
   constructor(
     private ingreatService: IngreatService
   ) {
-    let i1 = new Ingredient();
-    i1.name = "Hallo";
-    let i2 = new Ingredient();
-    i2.name = "Angular";
-    console.log(ingreatService.reqRecipesByIngredients([i1, i2]));
+    console.log(ingreatService.reqRecipesByIngredients([new Ingredient("Hallo"), new Ingredient("Angular")]));
   }
 
 }
