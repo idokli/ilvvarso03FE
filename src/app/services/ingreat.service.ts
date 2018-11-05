@@ -3,11 +3,25 @@ import {Recipe} from "../dataclasses/Recipe";
 import {Ingredient} from "../dataclasses/Ingredient";
 import {DifficultyLevel} from "../dataclasses/DifficultyLevel";
 import {IngredientInRecipe} from "../dataclasses/IngredientInRecipe";
+import {from, Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class IngreatService {
+
+  searchIngredients(term: string): Observable<Ingredient[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+    return from(
+      [
+        this.mockIngredients().filter(
+        ingredient => ingredient.name.toLowerCase().includes(term.toLowerCase())
+        )
+      ]
+    );
+  }
 
   reqRecipesByIngredients(ingredients: Ingredient[]):Recipe[] {
     // HTTP
@@ -17,6 +31,8 @@ export class IngreatService {
     // return recipes returned from the server
     return [this.idoAuflauf(), this.victorSalat(), this.lucasTorte()];
   }
+
+  // MOCK:
 
   private idoAuflauf(): Recipe {
     let recipe = new Recipe();
@@ -74,14 +90,37 @@ export class IngreatService {
 
   private allArgsIngredient (id: number, name: string, recipe: Recipe, quantity: number, measure:string): IngredientInRecipe {
     let ingredientInRecipe = new IngredientInRecipe();
-    let ingredient = new Ingredient();
-    ingredient.name = name;
+    ingredientInRecipe.ingredient = new Ingredient(name);
     ingredientInRecipe.id = id;
-    ingredientInRecipe.ingredient = ingredient;
     ingredientInRecipe.recipe = recipe;
     ingredientInRecipe.quantity = quantity;
     ingredientInRecipe.measure = measure;
     return ingredientInRecipe;
+  }
+
+  private mockIngredients(): Ingredient[] {
+    let ingredients: Ingredient[] = new Array<Ingredient>(20);
+    ingredients[0] = new Ingredient("Tomate");
+    ingredients[1] = new Ingredient("Banane");
+    ingredients[2] = new Ingredient("Mett");
+    ingredients[3] = new Ingredient("Rosinen");
+    ingredients[4] = new Ingredient("Wasser");
+    ingredients[5] = new Ingredient("Harzer Rolle");
+    ingredients[6] = new Ingredient("Schinken");
+    ingredients[7] = new Ingredient("Skyr");
+    ingredients[8] = new Ingredient("Avocado");
+    ingredients[9] = new Ingredient("Frischkäse");
+    ingredients[10] = new Ingredient("Brot");
+    ingredients[11] = new Ingredient("Brezel");
+    ingredients[12] = new Ingredient("Apfelmus");
+    ingredients[13] = new Ingredient("Apfel");
+    ingredients[14] = new Ingredient("Bier");
+    ingredients[15] = new Ingredient("Backpulver");
+    ingredients[16] = new Ingredient("Kartoffel");
+    ingredients[17] = new Ingredient("Rumpsteak");
+    ingredients[18] = new Ingredient("Orange");
+    ingredients[19] = new Ingredient("Mandarine");
+    return ingredients;
   }
 
 }
