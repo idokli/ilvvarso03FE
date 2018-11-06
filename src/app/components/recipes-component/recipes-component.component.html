@@ -1,3 +1,4 @@
-<p>
-  recipes-component works!
-</p>
+<div *ngFor="let recipe of recipes" id="recipes">
+  <app-recipe-component [recipe]="recipe"></app-recipe-component>
+
+</div>

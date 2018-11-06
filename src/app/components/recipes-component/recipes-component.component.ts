@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Recipe} from '../../dataclasses/Recipe';
+import {IngreatService} from '../../services/ingreat.service';
 
 @Component({
   selector: 'app-recipes-component',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipesComponentComponent implements OnInit {
 
-  constructor() { }
+  @Input() recipes: Recipe[];
+
+  constructor( private ingreatService: IngreatService) { }
 
   ngOnInit() {
+    this.recipes = this.ingreatService.reqRecipesByIngredients(null);
   }
 
 }

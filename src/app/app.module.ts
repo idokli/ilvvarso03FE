@@ -6,6 +6,7 @@ import { IngredientsComponentComponent } from './components/ingredients-componen
 import { HeaderComponentComponent } from './components/header-component/header-component.component';
 import { RecipesComponentComponent } from './components/recipes-component/recipes-component.component';
 import { IngredientsSearchComponentComponent } from './components/ingredients-search-component/ingredients-search-component.component';
+import { RecipeComponentComponent } from './components/recipe-component/recipe-component.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { IngredientsSearchComponentComponent } from './components/ingredients-se
     IngredientsComponentComponent,
     HeaderComponentComponent,
     RecipesComponentComponent,
-    IngredientsSearchComponentComponent
+    IngredientsSearchComponentComponent,
+    RecipeComponentComponent
   ],
   imports: [
     BrowserModule
