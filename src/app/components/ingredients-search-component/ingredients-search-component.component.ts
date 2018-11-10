@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { distinctUntilChanged, switchMap} from "rxjs/operators";
+import {distinctUntilChanged, switchMap} from "rxjs/operators";
 import {Observable, Subject} from "rxjs";
 import {Ingredient} from "../../dataclasses/Ingredient";
 import {IngreatService} from "../../services/ingreat.service";
@@ -26,6 +26,9 @@ export class IngredientsSearchComponentComponent implements OnInit{
   /** Subject for the search terms entered. */
   private searchTerms = new Subject<string>();
 
+  /** Either undefined or an ingredient matching the input. */
+  foundIngredient: Ingredient;
+
   /**
    * List of ingredients that have already been added to the
    * list of added ingredients. (Given in as an input)
@@ -47,17 +50,6 @@ export class IngredientsSearchComponentComponent implements OnInit{
   ) {}
 
   /**
-   * Starts a search based on the entered term.
-   *
-   * @since 05.11.2018
-   * @author Lucas Larisch
-   * @param {string} term Search term entered by the user.
-   */
-  search(term: string): void {
-    this.searchTerms.next(term.trim());
-  }
-
-  /**
    * On initialization, the Observable containing ingredients matching
    * the entered search term is requested and piped.
    *
@@ -67,31 +59,52 @@ export class IngredientsSearchComponentComponent implements OnInit{
   ngOnInit(): void {
     this.ingredients$ = this.searchTerms.pipe(
       distinctUntilChanged(),
-      switchMap((term: string) => this.ingreatService.searchIngredients(term)),
+      switchMap((term: string) => this.ingreatService.searchIngredients(term))
     );
   }
 
   /**
-   * Resets both input field and loaded suggestions and adds a new ingredient
-   * with the name put in by the user to the EventEmitter.
+   * Starts a search based on the entered term.
    *
    * @since 05.11.2018
    * @author Lucas Larisch
-   * @param {string} ingredientName Name of the ingredient to be added.
+   * @param {string} term Search term entered by the user.
    */
-  addIngredient(ingredientName: string): void {
-    // Clears input field / empty search for clearing the list:
-    (<HTMLInputElement>document.getElementById("search")).value = "";
-    this.search("");
-
-    // Bind value to the output emitter:
-    this.addedIngredient.emit(new Ingredient(ingredientName.trim()));
+  search(term: string): void {
+    this.searchTerms.next(term.trim());
+    this.findIngredientOfSubscribedObservable(term);
   }
 
   /**
-   * Checks whether a string given in as a parameter is either empty or if not,
-   * whether there is an ingredient saved in the list of all added ingredients
-   * with a name matching the param.
+   * In case of {@link IngredientsSearchComponentComponent#foundIngredient} not being
+   * undefined or the optional param being used, both input field with ID 'search' and
+   * loaded {@link IngredientsSearchComponentComponent#ingredients$} will be reset.
+   * A new ingredient is bound to the EventEmitter. This ingredient is either
+   * the value given in as a param or
+   * {@link IngredientsSearchComponentComponent#foundIngredient}.
+   *
+   * @since 05.11.2018
+   * @author Lucas Larisch
+   * @param {Ingredient} ingredient Ingredient to be added. (optional param)
+   */
+  addIngredient(ingredient?: Ingredient): void {
+    // Binds value to the output emitter:
+    if (!ingredient) {
+      ingredient = this.foundIngredient;
+    }
+    // ingredient could be undefined:
+    if (ingredient) {
+      this.addedIngredient.emit(ingredient);
+
+      // Clears input field / empty search for clearing the list:
+      (<HTMLInputElement>document.getElementById("search")).value = "";
+      this.search("");
+    }
+  }
+
+  /**
+   * Checks whether a string given in as a parameter matches the name of an
+   * ingredient saved in the list of all added ingredients.
    *
    * @since 05.11.2018
    * @author Lucas Larisch
@@ -100,17 +113,29 @@ export class IngredientsSearchComponentComponent implements OnInit{
    *          list containing added ingredients (name of the ingredient). Otherwise
    *          false.
    */
-  isIngredientAlreadyAddedOrEmpty(ingredientName: string): boolean {
-    // TODO: Extra method for empty string?
-    // TODO: filter by "to lower case"?
-    ingredientName = ingredientName.trim();
-    if (ingredientName==="") {
-      return true;
-    } else {
-      return this.registeredIngredients.map(
-        ingredient => ingredient.name
-      ).includes(ingredientName);
-    }
+  isIngredientAlreadyAdded(ingredientName: string): boolean {
+    return this.registeredIngredients
+      .map(ingredient => ingredient.name.toLowerCase())
+      .includes(ingredientName.trim().toLowerCase()
+      );
+  }
+
+  /**
+   * Checks whether an ingredient (name) is in the list of suggested ingredients.
+   * If so, {@link IngredientsSearchComponentComponent#foundIngredient} will be set
+   * to this ingredient, if not it will be undefined.
+   *
+   * @since 10.11.2018
+   * @author Lucas Larisch
+   * @param {string} ingredientName Name of the ingredient to be checked if it exists.
+   */
+  private findIngredientOfSubscribedObservable(ingredientName: string): void {
+    this.ingredients$.subscribe(
+      ingredients =>
+        this.foundIngredient = ingredients
+          .filter(ingredient => !this.isIngredientAlreadyAdded(ingredient.name))
+          .find(ingredient => ingredient.name.toLowerCase() === ingredientName.toLowerCase().trim())
+    );
   }
 
 }
