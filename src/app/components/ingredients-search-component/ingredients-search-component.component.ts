@@ -102,7 +102,7 @@ export class IngredientsSearchComponentComponent implements OnInit{
    */
   isIngredientAlreadyAddedOrEmpty(ingredientName: string): boolean {
     // TODO: Extra method for empty string?
-    // TODO: filer by "to lower case"?
+    // TODO: filter by "to lower case"?
     ingredientName = ingredientName.trim();
     if (ingredientName==="") {
       return true;
