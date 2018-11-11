@@ -1,13 +1,17 @@
-<div class="col-md-6">
-  <div class="col-md-12">
-    {{recipe.title}}
+<div class="row card shadow p-3 mb-5 bg-white rounded">
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        {{recipe.title}}
+      </div>
+      <div>
+        Dauer: {{recipe.preparationTimeInMin+recipe.cookingTimeInMin+recipe.restingTimeInMin}}
+      </div>
+    </div>
+    <div class="col-md-6 text-center">
+        <img src="{{recipe.pictureUrl}}" width="250" height="250" class="img-thumbnail no-max-width">
+    </div>
   </div>
-  <div class="col-md-12">
-    Dauer: {{recipe.preparationTimeInMin+recipe.cookingTimeInMin+recipe.restingTimeInMin}}
-  </div>
-</div>
-<div class="col-md-6">
-  <img src="{{recipe.pictureUrl}}" width="250" height="250">
 </div>
 
 
