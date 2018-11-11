@@ -1,15 +1,14 @@
-<div class="border">
-  <div>
-    <div>
-      {{recipe.title}}
-    </div>
-    <div>
-      <img src="{{recipe.pictureUrl}}" width="250" height="250">
-    </div>
-    <div>
-      Dauer: {{recipe.preparationTimeInMin+recipe.cookingTimeInMin+recipe.restingTimeInMin}}
-    </div>
+<div class="col-md-6">
+  <div class="col-md-12">
+    {{recipe.title}}
+  </div>
+  <div class="col-md-12">
+    Dauer: {{recipe.preparationTimeInMin+recipe.cookingTimeInMin+recipe.restingTimeInMin}}
   </div>
 </div>
+<div class="col-md-6">
+  <img src="{{recipe.pictureUrl}}" width="250" height="250">
+</div>
+
 
 
