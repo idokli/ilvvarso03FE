@@ -3,18 +3,15 @@
          id="search"
          placeholder="Hinzufügen..."
          (keyup)="search(searchBox.value)"
-         (keyup.enter)="add.click()"
-  />
+         (keyup.enter)="add.click()" />
 
   <button #add
-          (click)="addIngredient(searchBox.value)"
           [hidden]="!searchBox.value.trim()"
-          [disabled]="isIngredientAlreadyAddedOrEmpty(searchBox.value)"
-  >+</button>
+          (click)="addIngredient()" >+</button>
 
   <ul id="search_results">
-    <li *ngFor="let ingredient of ingredients$ | async" [hidden]="isIngredientAlreadyAddedOrEmpty(ingredient.name)">
-      <a (click)="addIngredient(ingredient.name)">
+    <li *ngFor="let ingredient of ingredients$ | async" [hidden]="isIngredientAlreadyAdded(ingredient.name)">
+      <a (click)="addIngredient(ingredient)">
         {{ingredient.name}}
       </a>
     </li>
