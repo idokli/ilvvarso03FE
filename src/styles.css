@@ -2,3 +2,9 @@
 
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
+
+:root {
+  --main-color: "#8aba18";
+  --main-accent-color: "cc6600";
+  --warning-oolor: "990000";
+}
