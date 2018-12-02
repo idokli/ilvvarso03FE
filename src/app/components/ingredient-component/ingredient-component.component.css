@@ -33,3 +33,7 @@ li {
 .warning {
   color: red;
 }
+
+div.input-group {
+  padding-bottom: 8px;
+}

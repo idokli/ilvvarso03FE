@@ -18,10 +18,16 @@ export class IngredientComponentComponent implements OnInit {
 
   measures: string[];
 
+  private amountInMeasureValue: AmountInMeasure = new AmountInMeasure();
+
   constructor(
     private ingreatService: IngreatService
   ){ }
 
+  /**
+   * @author Lucas Larisch
+   * @since 02.12.2018
+   */
   ngOnInit(): void {
     this.ingreatService.reqMeasuresOfIngredient(this.ingredient.id).subscribe(
       measures => this.measures = measures
@@ -36,7 +42,8 @@ export class IngredientComponentComponent implements OnInit {
    * @author Lucas Larisch
    */
   deleteIngredient(): void {
-    this.amountInMeasure.emit(new AmountInMeasure(0, null));
+    this.amountInMeasureValue.amount = 0;
+    this.amountInMeasure.emit(this.amountInMeasureValue);
   }
 
   /**
@@ -48,7 +55,7 @@ export class IngredientComponentComponent implements OnInit {
    */
   showOrHideMeasure(accordion: HTMLDivElement, panel: HTMLDivElement): void {
     accordion.classList.toggle("active");
-    if (panel.style.maxHeight){
+    if (panel.style.maxHeight) {
       panel.style.maxHeight = null;
     } else {
       panel.style.maxHeight = panel.scrollHeight + "px";
@@ -62,12 +69,16 @@ export class IngredientComponentComponent implements OnInit {
    */
   amountOrMeasureChanged(amount: HTMLInputElement, measure: HTMLSelectElement): void {
     let value = Number(amount.value);
+    const WARNING_CSS_CLASS = "warning";
     if(value && value > 0) {
-      let selectedMeasure: string = this.measures[measure.selectedIndex];
-      this.amountInMeasure.emit(new AmountInMeasure(value, selectedMeasure));
-      amount.classList.remove("warning");
+      this.amountInMeasureValue.amount = value;
+      this.amountInMeasureValue.measure = this.measures[measure.selectedIndex];
+      this.amountInMeasure.emit(this.amountInMeasureValue);
+      amount.classList.remove(WARNING_CSS_CLASS);
     } else {
-      amount.classList.add("warning");
+      this.amountInMeasureValue.amount = undefined;
+      this.amountInMeasure.emit(this.amountInMeasureValue)
+      amount.classList.add(WARNING_CSS_CLASS);
     }
   }
 }

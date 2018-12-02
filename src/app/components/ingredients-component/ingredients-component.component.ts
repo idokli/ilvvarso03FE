@@ -65,10 +65,11 @@ export class IngredientsComponentComponent {
  */
 export class AmountInMeasure {
 
-  constructor(amount: number, measure: string) {
+  constructor(amount?: number, measure?: string) {
     this.amount = amount;
     this.measure = measure;
   }
+
   amount: number;
   measure: string;
 }

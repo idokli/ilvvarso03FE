@@ -1,14 +1,18 @@
 <li>
   <div class="accordion" (click)="showOrHideMeasure(accordion, panel)" #accordion>
-  <button (click)="deleteIngredient()">X</button>
-  {{ingredient.name}}
+    <button (click)="deleteIngredient()">X</button>
+    <!-- TODO Bootstrap icon or CSS? -->
+    {{ingredient.name}}
   </div>
+
   <div class="panel" #panel>
-    <input type="number" (input)="amountOrMeasureChanged(amount, measure)" #amount >
-    <select (change)="amountOrMeasureChanged(amount, measure)" #measure>
-      <option *ngFor="let measure of measures">
-        {{measure}}
-      </option>
-    </select>
+    <div class="input-group">
+      <input class="form-control" type="number" (input)="amountOrMeasureChanged(amount, measure)" #amount >
+      <select class="form-control" (change)="amountOrMeasureChanged(amount, measure)" #measure>
+        <option *ngFor="let measure of measures">
+          {{measure}}
+        </option>
+      </select>
+    </div>
   </div>
 </li>
