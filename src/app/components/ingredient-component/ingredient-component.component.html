@@ -1,6 +1,14 @@
-<li class="accordion">
-  <span>
+<li>
+  <div class="accordion" (click)="showOrHideMeasure(accordion, panel)" #accordion>
   <button (click)="deleteIngredient()">X</button>
   {{ingredient.name}}
-    </span>
+  </div>
+  <div class="panel" #panel>
+    <input type="number" (input)="amountOrMeasureChanged(amount, measure)" #amount >
+    <select (change)="amountOrMeasureChanged(amount, measure)" #measure>
+      <option *ngFor="let measure of measures">
+        {{measure}}
+      </option>
+    </select>
+  </div>
 </li>

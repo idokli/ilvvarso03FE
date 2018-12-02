@@ -32,6 +32,10 @@ export class IngreatService {
     return [this.idoAuflauf(), this.victorSalat(), this.lucasTorte()];
   }
 
+  reqMeasuresOfIngredient(id: number): Observable<string[]> {
+    return from([["kg","g"]]);
+  }
+
   // MOCK:
 
   private idoAuflauf(): Recipe {

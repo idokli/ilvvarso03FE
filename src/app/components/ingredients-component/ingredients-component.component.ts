@@ -15,7 +15,7 @@ import {Ingredient} from "../../dataclasses/Ingredient";
 export class IngredientsComponentComponent {
 
   /** List containing all ingredients the user has added. */
-  registeredIngredients: Map<Ingredient, AmountInMeasure> = new Map<Ingredient, AmountInMeasure>();
+  private registeredIngredients: Map<Ingredient, AmountInMeasure> = new Map<Ingredient, AmountInMeasure>();
 
   /**
    * Pushes an ingredient to the array containing all added
