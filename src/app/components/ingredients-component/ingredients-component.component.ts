@@ -15,7 +15,7 @@ import {Ingredient} from "../../dataclasses/Ingredient";
 export class IngredientsComponentComponent {
 
   /** List containing all ingredients the user has added. */
-  registeredIngredients: Ingredient[] = Array<Ingredient>();
+  private registeredIngredients: Map<Ingredient, AmountInMeasure> = new Map<Ingredient, AmountInMeasure>();
 
   /**
    * Pushes an ingredient to the array containing all added
@@ -26,20 +26,50 @@ export class IngredientsComponentComponent {
    * @param {Ingredient} ingredient Ingredient to be added.
    */
   onIngredientAdded(ingredient: Ingredient): void {
-    this.registeredIngredients.push(ingredient);
+    this.registeredIngredients.set(ingredient, undefined);
   }
 
   /**
-   * Deletes an ingredient from the list containing all added
-   * ingredients.
+   * Method to change the amount in a measure of an ingredient. In case of the
+   * amount being 0, the ingredient will be deleted from {@link registeredIngredients}.
    *
-   * @since 05.11.2018
+   * @since 12.11.2018
    * @author Lucas Larisch
-   * @param {Ingredient} ingredient Ingredient to be deleted.
+   * @param $event Amount in a measure to be set for the ingredient.
+   * @param ingredient The ingredient the amount of is to be changed.
    */
-  deleteIngredient(ingredient: Ingredient): void {
-    const index: number = this.registeredIngredients.indexOf(ingredient);
-    this.registeredIngredients.splice(index, 1);
+  onAmountChanged($event: AmountInMeasure, ingredient: Ingredient): void {
+    if ($event.amount === 0) {
+      this.registeredIngredients.delete(ingredient);
+    } else {
+      this.registeredIngredients.set(ingredient, $event);
+    }
   }
 
+  /**
+   * Returns all added ingredients as array.
+   *
+   * @since 12.11.2018
+   * @author Lucas Larisch
+   * @returns {Ingredient[]} All added ingredients as array.
+   */
+  registeredIngredientsAsArray(): Ingredient[] {
+      return Array.from(this.registeredIngredients.keys());
+  }
+
+}
+
+/**
+ * @since 12.11.2018
+ * @author Lucas Larisch
+ */
+export class AmountInMeasure {
+
+  constructor(amount?: number, measure?: string) {
+    this.amount = amount;
+    this.measure = measure;
+  }
+
+  amount: number;
+  measure: string;
 }

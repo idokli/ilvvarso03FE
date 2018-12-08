@@ -1,11 +1,12 @@
 <app-ingredients-search-component
-  [registeredIngredients]="registeredIngredients"
+  [registeredIngredients]="registeredIngredientsAsArray()"
   (addedIngredient)="onIngredientAdded($event)"
 ></app-ingredients-search-component>
 
 <ul>
-  <li *ngFor="let ingredient of registeredIngredients">
-    <button (click)="deleteIngredient(ingredient)">X</button>
-    {{ingredient.name}}
-  </li>
+  <app-ingredient-component
+    *ngFor="let ingredient of registeredIngredientsAsArray()"
+    [ingredient]="ingredient"
+    (amountInMeasure)="onAmountChanged($event, ingredient)"
+  ></app-ingredient-component>
 </ul>

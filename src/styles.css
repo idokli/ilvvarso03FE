@@ -5,3 +5,9 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 
+
+:root {
+  --main-color: "#8aba18";
+  --main-accent-color: "cc6600";
+  --warning-oolor: "990000";
+}

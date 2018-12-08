@@ -11,5 +11,5 @@ export class Recipe {
   rate: number;
   difficultyLevel: DifficultyLevel;
   pictureUrl: string;
-  ingredientInRecipes: IngredientInRecipe[];
+  ingredientInRecipe: IngredientInRecipe[];
 }

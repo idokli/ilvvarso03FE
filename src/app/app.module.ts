@@ -10,6 +10,7 @@ import { RecipesComponentComponent } from './components/recipes-component/recipe
 import { IngredientsSearchComponentComponent } from './components/ingredients-search-component/ingredients-search-component.component';
 import { RecipeComponentComponent } from './components/recipe-component/recipe-component.component';
 import { RecipePopupComponent } from './components/recipe-popup/recipe-popup.component';
+import { IngredientComponentComponent } from './components/ingredient-component/ingredient-component.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RecipePopupComponent } from './components/recipe-popup/recipe-popup.com
     RecipesComponentComponent,
     IngredientsSearchComponentComponent,
     RecipeComponentComponent,
-    RecipePopupComponent
+    RecipePopupComponent,
+    IngredientComponentComponent
   ],
   imports: [
     BrowserModule,

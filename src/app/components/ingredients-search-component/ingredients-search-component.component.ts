@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {distinctUntilChanged, switchMap} from "rxjs/operators";
-import {Observable, Subject} from "rxjs";
+import {distinctUntilChanged, map, switchMap} from "rxjs/operators";
+import {from, Observable, of, Subject} from "rxjs";
 import {Ingredient} from "../../dataclasses/Ingredient";
 import {IngreatService} from "../../services/ingreat.service";
 
@@ -15,7 +15,7 @@ import {IngreatService} from "../../services/ingreat.service";
   templateUrl: './ingredients-search-component.component.html',
   styleUrls: ['./ingredients-search-component.component.css']
 })
-export class IngredientsSearchComponentComponent implements OnInit{
+export class IngredientsSearchComponentComponent implements OnInit {
 
   /**
    * Observable (Ingredient-array) for the list containing suggestions for ingredients matching
@@ -88,12 +88,12 @@ export class IngredientsSearchComponentComponent implements OnInit{
    * @param {Ingredient} ingredient Ingredient to be added. (optional param)
    */
   addIngredient(ingredient?: Ingredient): void {
-    // Binds value to the output emitter:
     if (!ingredient) {
       ingredient = this.foundIngredient;
     }
     // ingredient could be undefined:
     if (ingredient) {
+      // Binds value to the output emitter:
       this.addedIngredient.emit(ingredient);
 
       // Clears input field / empty search for clearing the list:
