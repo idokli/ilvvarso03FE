@@ -12,6 +12,8 @@ import { IngredientsSearchComponentComponent } from './components/ingredients-se
 import { RecipeComponentComponent } from './components/recipe-component/recipe-component.component';
 import { RecipePopupComponent } from './components/recipe-popup/recipe-popup.component';
 import { IngredientComponentComponent } from './components/ingredient-component/ingredient-component.component';
+import { IngredientsInRecipeComponentComponent } from './components/ingredients-in-recipe-component/ingredients-in-recipe-component.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,15 @@ import { IngredientComponentComponent } from './components/ingredient-component/
     IngredientsSearchComponentComponent,
     RecipeComponentComponent,
     RecipePopupComponent,
-    IngredientComponentComponent
+    IngredientComponentComponent,
+    IngredientsInRecipeComponentComponent
   ],
   imports: [
     BrowserModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from '../../dataclasses/Recipe';
 import {IngreatService} from '../../services/ingreat.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-recipes-component',
@@ -14,7 +15,11 @@ export class RecipesComponentComponent implements OnInit {
   constructor( private ingreatService: IngreatService) { }
 
   ngOnInit() {
-    this.recipes = this.ingreatService.reqRecipesByIngredients(null);
+    this.ingreatService.reqRecipesByIngredients(null).subscribe( data => {
+      this.recipes = data;
+    }, (error: HttpErrorResponse) => {
+      console.log(`Backend returned code ${error.status}, body was: ${error.error}`);
+    });
   }
 
 }
