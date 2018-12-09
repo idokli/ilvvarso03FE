@@ -14,9 +14,11 @@ export interface DialogData {
 export class RecipePopupComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<RecipePopupComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+              @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
 
-              recipe: Recipe;
+  recipe: Recipe;
+
   ngOnInit() {
     this.recipe = this.data.recipe;
   }

@@ -4,6 +4,6 @@ export class Ingredient {
     this.name = name;
   }
 
-  id: number = 1;
+  id: number;
   name: string;
 }
