@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatTooltipModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
@@ -32,7 +32,11 @@ import {HttpClientModule} from '@angular/common/http';
     MatDialogModule,
     BrowserAnimationsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTooltipModule
+  ],
+  exports: [
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent],
