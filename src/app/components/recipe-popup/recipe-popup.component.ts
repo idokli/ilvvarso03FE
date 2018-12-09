@@ -4,6 +4,7 @@ import {Recipe} from '../../dataclasses/Recipe';
 
 export interface DialogData {
   recipe: Recipe;
+  fehlendeZustaten: string[];
 }
 
 @Component({

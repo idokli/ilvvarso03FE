@@ -21,11 +21,11 @@ export class RecipeComponentComponent implements OnInit {
     this.howManyIngredientsLack(null);
   }
 
-  openDialog(recipe: Recipe) {
+  openDialog() {
     const dialogRef = this.dialog.open(RecipePopupComponent, {
       height: '400px',
       width: '600px',
-      data: {recipe: recipe}
+      data: {recipe: this.recipe, fehlendeZustaten: this.fehlendeZustaten}
     });
   }
 

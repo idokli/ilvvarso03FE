@@ -19,6 +19,9 @@
       Zubereitungseinleitungen :
       <br>{{recipe.preparation}}
     </div>
+    <div>
+      <app-lack-ingredients [ingredientsInRecipes]="recipe.ingredientInRecipe" [fehlendeZutaten]="fehlendeZustaten"></app-lack-ingredients>
+    </div>
   </div>
   <div class="col-md-6 text-center">
     <img src="{{recipe.pictureUrl}}" width="250" height="250" class="img-thumbnail no-max-width">
