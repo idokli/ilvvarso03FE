@@ -26,8 +26,8 @@ export class RecipeComponentComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(RecipePopupComponent, {
-      height: '400px',
-      width: '600px',
+      height: '600px',
+      width: '800px',
       data: {recipe: this.recipe, fehlendeZustaten: this.fehlendeZustaten}
     });
   }

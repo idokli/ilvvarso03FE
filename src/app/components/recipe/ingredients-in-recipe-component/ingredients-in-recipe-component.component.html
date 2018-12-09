@@ -1,5 +1,8 @@
-<div *ngFor="let ingredientInRecipe of ingredientsInRecipes">
-  {{ingredientInRecipe.quantity}}
-  {{ingredientInRecipe.measure}}
-  {{ingredientInRecipe.ingredient.name}}
-</div>
+<ul>
+  <li *ngFor="let ingredientInRecipe of ingredientsInRecipes">
+    {{ingredientInRecipe.quantity}}
+    {{ingredientInRecipe.measure}}
+    {{ingredientInRecipe.ingredient.name}}
+  </li>
+</ul>
+

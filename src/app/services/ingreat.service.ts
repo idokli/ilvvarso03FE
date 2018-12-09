@@ -99,7 +99,7 @@ export class IngreatService {
   private allArgsIngredient (id: number, idIngredient: number, name: string, recipe: Recipe, quantity: number, measure:string): IngredientInRecipe {
     let ingredientInRecipe = new IngredientInRecipe();
     ingredientInRecipe.ingredient = new Ingredient(idIngredient,name);
-    ingredientInRecipe.ingredient.products = [new Product("testProduct",Supermarket.EDEKA, 1.3)];
+    ingredientInRecipe.ingredient.products = [new Product("testProduct",Supermarket.REWE, 1.3)];
     ingredientInRecipe.id = id;
     ingredientInRecipe.recipe = recipe;
     ingredientInRecipe.quantity = quantity;
