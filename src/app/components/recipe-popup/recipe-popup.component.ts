@@ -1,10 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Recipe} from '../../dataclasses/Recipe';
+import {IngredientInRecipe} from '../../dataclasses/IngredientInRecipe';
 
 export interface DialogData {
   recipe: Recipe;
-  fehlendeZustaten: string[];
+  fehlendeZustaten: IngredientInRecipe[];
 }
 
 @Component({
@@ -19,9 +20,11 @@ export class RecipePopupComponent implements OnInit {
   }
 
   recipe: Recipe;
+  fehlendeZustaten: IngredientInRecipe[];
 
   ngOnInit() {
     this.recipe = this.data.recipe;
+    this.fehlendeZustaten = this.data.fehlendeZustaten;
   }
 
   onNoClick(): void {

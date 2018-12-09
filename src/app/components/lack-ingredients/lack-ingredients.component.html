@@ -1,3 +1,8 @@
-<p>
-  lack-ingredients works!
-</p>
+<div *ngFor="let fehlendeZutat of fehlendeZustaten">
+  <span>{{fehlendeZutat.ingredient.name}}</span>
+  <div *ngFor="let product of fehlendeZutat.ingredient.products">
+    {{product.name}}
+    {{product.price}}
+    {{product.supermarket}}
+  </div>
+</div>

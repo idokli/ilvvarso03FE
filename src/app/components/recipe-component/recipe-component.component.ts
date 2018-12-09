@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from '../../dataclasses/Recipe';
 import {MatDialog} from '@angular/material';
 import {RecipePopupComponent} from '../recipe-popup/recipe-popup.component';
+import {IngredientInRecipe} from '../../dataclasses/IngredientInRecipe';
 
 
 @Component({
@@ -13,12 +14,14 @@ export class RecipeComponentComponent implements OnInit {
 
   @Input() recipe: Recipe;
 
-  fehlendeZustaten: string[];
+  @Input() searchedIngredients: string[];
+
+  fehlendeZustaten: IngredientInRecipe[] = [];
 
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.howManyIngredientsLack(null);
+    this.lackIngredients();
   }
 
   openDialog() {
@@ -29,16 +32,13 @@ export class RecipeComponentComponent implements OnInit {
     });
   }
 
-  howManyIngredientsLack(searchedIngredients: string[]){
-    searchedIngredients = ['Mett', 'Petersilie','Brezeln'];
-    let ingredientsNames = [];
-    for (const argument of this.recipe.ingredientInRecipe) {
-      ingredientsNames.push(argument.ingredient.name);
+  lackIngredients(){
+    for (const ingredientInRecipe of this.recipe.ingredientInRecipe) {
+      if(!this.searchedIngredients.includes(ingredientInRecipe.ingredient.name)){
+        this.fehlendeZustaten.push(ingredientInRecipe);
+      }
     }
-    this.fehlendeZustaten = this.removeFromArray(ingredientsNames, searchedIngredients);
   }
 
-  removeFromArray(original, remove):string[] {
-    return original.filter(value => !remove.includes(value));
-  }
+
 }

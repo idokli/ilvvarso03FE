@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IngredientInRecipe} from '../../dataclasses/IngredientInRecipe';
+import {Ingredient} from '../../dataclasses/Ingredient';
 
 @Component({
   selector: 'app-lack-ingredients',
@@ -8,17 +9,12 @@ import {IngredientInRecipe} from '../../dataclasses/IngredientInRecipe';
 })
 export class LackIngredientsComponent implements OnInit {
 
-  @Input() ingredientsInRecipes: IngredientInRecipe[];
-
-  @Input() fehlendeZutaten: string[];
+  @Input() fehlendeZustaten: IngredientInRecipe[];
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  getProductsForIngredients(ingredient:string){
-    for (const ingredient of this.ingredientsInRecipes) {
-    }
-  }
+
 }
