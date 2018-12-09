@@ -1,3 +1,5 @@
+import {Product} from './Product';
+
 export class Ingredient {
 
   constructor(id, name) {
@@ -7,4 +9,5 @@ export class Ingredient {
 
   id: number;
   name: string;
+  products: Product[];
 }
