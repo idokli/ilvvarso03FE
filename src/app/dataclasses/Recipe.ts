@@ -1,15 +1,16 @@
-import {DifficultyLevel} from "./DifficultyLevel";
-import {IngredientInRecipe} from "./IngredientInRecipe";
+import {DifficultyLevel} from './DifficultyLevel';
+import {IngredientInRecipe} from './IngredientInRecipe';
+import {RecipeSite} from './RecipeSite';
 
 export class Recipe {
   id: number;
   title: string;
   preparation: string;
-  cookingTimeInMin: number;
   preparationTimeInMin: number;
-  restingTimeInMin: number;
   rate: number;
   difficultyLevel: DifficultyLevel;
   pictureUrl: string;
   ingredientInRecipe: IngredientInRecipe[];
+  identifier: string;
+  recipeSite: RecipeSite;
 }
