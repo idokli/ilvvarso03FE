@@ -4,9 +4,12 @@
       <div>
         {{recipe.title}}
       </div>
+      <div>
+        Schwierigkeitsgrad: {{recipe.difficultyLevel}}
+      </div>
       <div><ngb-rating [rate]="recipe.rate" [readonly]="true" [max]="5"></ngb-rating></div>
       <div>
-        Dauer: {{recipe.preparationTimeInMin+recipe.cookingTimeInMin+recipe.restingTimeInMin}}
+        Dauer: {{recipe.preparationTimeInMin}} Minuten
       </div>
     </div>
     <div class="col-md-6 text-center">
