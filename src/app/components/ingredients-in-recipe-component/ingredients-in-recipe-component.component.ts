@@ -8,7 +8,8 @@ import {IngredientInRecipe} from '../../dataclasses/IngredientInRecipe';
 })
 export class IngredientsInRecipeComponentComponent {
 
-  @Input() ingredientsInRecipe: IngredientInRecipe[];
+  @Input() ingredientsInRecipes: IngredientInRecipe[];
+
   constructor() { }
 
 }

@@ -1,3 +1,5 @@
-<p>
-  ingredients-in-recipe-component works!
-</p>
+<div *ngFor="let ingredientInRecipe of ingredientsInRecipes">
+  {{ingredientInRecipe.quantity}}
+  {{ingredientInRecipe.measure}}
+  {{ingredientInRecipe.ingredient.name}}
+</div>
