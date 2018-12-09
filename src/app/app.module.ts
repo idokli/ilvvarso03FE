@@ -14,6 +14,7 @@ import { RecipePopupComponent } from './components/recipe-popup/recipe-popup.com
 import { IngredientComponentComponent } from './components/ingredient-component/ingredient-component.component';
 import { IngredientsInRecipeComponentComponent } from './components/ingredients-in-recipe-component/ingredients-in-recipe-component.component';
 import {HttpClientModule} from '@angular/common/http';
+import { LackIngredientsComponent } from './components/lack-ingredients/lack-ingredients.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {HttpClientModule} from '@angular/common/http';
     RecipeComponentComponent,
     RecipePopupComponent,
     IngredientComponentComponent,
-    IngredientsInRecipeComponentComponent
+    IngredientsInRecipeComponentComponent,
+    LackIngredientsComponent
   ],
   imports: [
     BrowserModule,
