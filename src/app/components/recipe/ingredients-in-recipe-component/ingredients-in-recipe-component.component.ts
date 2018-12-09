@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IngredientInRecipe} from '../../dataclasses/IngredientInRecipe';
+import {IngredientInRecipe} from '../../../dataclasses/IngredientInRecipe';
 
 @Component({
   selector: 'app-ingredients-in-recipe-component',

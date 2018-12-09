@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Ingredient} from "../../dataclasses/Ingredient";
+import {Ingredient} from "../../../dataclasses/Ingredient";
 import {AmountInMeasure} from "../ingredients-component/ingredients-component.component";
-import {IngreatService} from "../../services/ingreat.service";
+import {IngreatService} from "../../../services/ingreat.service";
 
 @Component({
   selector: 'app-ingredient-component',

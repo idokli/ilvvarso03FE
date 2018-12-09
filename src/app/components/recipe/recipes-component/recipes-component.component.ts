@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Recipe} from '../../dataclasses/Recipe';
-import {IngreatService} from '../../services/ingreat.service';
+import {Recipe} from '../../../dataclasses/Recipe';
+import {IngreatService} from '../../../services/ingreat.service';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({

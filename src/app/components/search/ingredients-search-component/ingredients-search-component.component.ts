@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {distinctUntilChanged, map, switchMap} from "rxjs/operators";
 import {from, Observable, of, Subject} from "rxjs";
-import {Ingredient} from "../../dataclasses/Ingredient";
-import {IngreatService} from "../../services/ingreat.service";
+import {Ingredient} from "../../../dataclasses/Ingredient";
+import {IngreatService} from "../../../services/ingreat.service";
 
 /**
  * Logic concerning the input field for adding ingredients.

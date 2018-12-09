@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Recipe} from '../../dataclasses/Recipe';
+import {Recipe} from '../../../dataclasses/Recipe';
 import {MatDialog} from '@angular/material';
 import {RecipePopupComponent} from '../recipe-popup/recipe-popup.component';
-import {IngredientInRecipe} from '../../dataclasses/IngredientInRecipe';
+import {IngredientInRecipe} from '../../../dataclasses/IngredientInRecipe';
 
 
 @Component({

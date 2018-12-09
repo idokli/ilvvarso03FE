@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Ingredient} from "../../dataclasses/Ingredient";
+import {Ingredient} from "../../../dataclasses/Ingredient";
 
 /**
  * Logic concerning the ingredients-list.
