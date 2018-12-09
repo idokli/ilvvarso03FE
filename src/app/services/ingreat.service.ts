@@ -72,8 +72,8 @@ export class IngreatService {
     recipe.difficultyLevel = DifficultyLevel.EASY;
     recipe.pictureUrl = 'https://c1.staticflickr.com/1/155/345466164_e7ef07bf6a_z.jpg?zz=1';
     recipe.ingredientInRecipe = [
-      this.allArgsIngredient(4,25, 'Eisbergsalat', recipe, 300, 'g'),
-      this.allArgsIngredient(5,26, 'Toffifee', recipe, 30, 'Stück'),
+      this.allArgsIngredientWithProduct(4,25, 'Eisbergsalat', recipe, 300, 'g','Eisbergsalat', Supermarket.EDEKA, 1),
+      this.allArgsIngredientWithProduct(5,26, 'Toffifee', recipe, 30, 'Stück','Toffifee', Supermarket.REWE, 4),
       this.allArgsIngredient(6,27, 'Rosinen', recipe, 1, 'kg')
     ];
     return recipe;
@@ -89,7 +89,7 @@ export class IngreatService {
     recipe.difficultyLevel = DifficultyLevel.EASY;
     recipe.pictureUrl = 'https://upload.wikimedia.org/wikipedia/commons/b/be/Torte_Wien_20091010_01.JPG';
     recipe.ingredientInRecipe = [
-      this.allArgsIngredient(7,22, 'Harzer Rolle', recipe, 1, 'kg'),
+      this.allArgsIngredientWithProduct(7,22, 'Harzer Rolle', recipe, 1, 'kg','Bio Harzer Rolle', Supermarket.REWE, 2),
       this.allArgsIngredient(8,23, 'Sahne', recipe, 400, 'g'),
       this.allArgsIngredient(9,24, 'Mett', recipe, 1000, 'g')
     ];
@@ -99,7 +99,19 @@ export class IngreatService {
   private allArgsIngredient (id: number, idIngredient: number, name: string, recipe: Recipe, quantity: number, measure:string): IngredientInRecipe {
     let ingredientInRecipe = new IngredientInRecipe();
     ingredientInRecipe.ingredient = new Ingredient(idIngredient,name);
-    ingredientInRecipe.ingredient.products = [new Product("testProduct",Supermarket.REWE, 1.3)];
+    ingredientInRecipe.id = id;
+    ingredientInRecipe.recipe = recipe;
+    ingredientInRecipe.quantity = quantity;
+    ingredientInRecipe.measure = measure;
+    return ingredientInRecipe;
+  }
+
+  private allArgsIngredientWithProduct (id: number, idIngredient: number, name: string,
+                                        recipe: Recipe, quantity: number, measure:string, productName:string, supermarket:Supermarket,
+                                        price:number): IngredientInRecipe {
+    let ingredientInRecipe = new IngredientInRecipe();
+    ingredientInRecipe.ingredient = new Ingredient(idIngredient,name);
+    ingredientInRecipe.ingredient.products = [new Product(productName,supermarket, price)];
     ingredientInRecipe.id = id;
     ingredientInRecipe.recipe = recipe;
     ingredientInRecipe.quantity = quantity;
