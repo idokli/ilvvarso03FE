@@ -13,9 +13,12 @@ export class RecipeComponentComponent implements OnInit {
 
   @Input() recipe: Recipe;
 
+  fehlendeZustaten: string[];
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.howManyIngredientsLack(null);
   }
 
   openDialog(recipe: Recipe) {
@@ -24,5 +27,18 @@ export class RecipeComponentComponent implements OnInit {
       width: '600px',
       data: {recipe: recipe}
     });
+  }
+
+  howManyIngredientsLack(searchedIngredients: string[]){
+    searchedIngredients = ['Mett', 'Petersilie','Brezeln'];
+    let ingredientsNames = [];
+    for (const argument of this.recipe.ingredientInRecipe) {
+      ingredientsNames.push(argument.ingredient.name);
+    }
+    this.fehlendeZustaten = this.removeFromArray(ingredientsNames, searchedIngredients);
+  }
+
+  removeFromArray(original, remove):string[] {
+    return original.filter(value => !remove.includes(value));
   }
 }

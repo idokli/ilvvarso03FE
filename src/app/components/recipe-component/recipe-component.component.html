@@ -11,6 +11,14 @@
       <div>
         Dauer: {{recipe.preparationTimeInMin}} Minuten
       </div>
+      <div *ngIf="fehlendeZustaten.length == 0; else somethingMissing">
+        Sie haben alle Zutaten
+      </div>
+
+      <ng-template #somethingMissing>
+        {{fehlendeZustaten.length}} Zustaten fehlen
+      </ng-template>
+
     </div>
     <div class="col-md-6 text-center">
         <img src="{{recipe.pictureUrl}}" width="250" height="250" class="img-thumbnail no-max-width">
