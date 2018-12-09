@@ -5,6 +5,8 @@ import {DifficultyLevel} from '../dataclasses/DifficultyLevel';
 import {IngredientInRecipe} from '../dataclasses/IngredientInRecipe';
 import {from, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {Product} from '../dataclasses/Product';
+import {Supermarket} from '../dataclasses/Supermarket';
 
 @Injectable({
   providedIn: 'root'
@@ -96,7 +98,8 @@ export class IngreatService {
 
   private allArgsIngredient (id: number, idIngredient: number, name: string, recipe: Recipe, quantity: number, measure:string): IngredientInRecipe {
     let ingredientInRecipe = new IngredientInRecipe();
-    ingredientInRecipe.ingredient = new Ingredient(idIngredient,name );
+    ingredientInRecipe.ingredient = new Ingredient(idIngredient,name);
+    ingredientInRecipe.ingredient.products = [new Product("testProduct",Supermarket.EDEKA, 1.3)];
     ingredientInRecipe.id = id;
     ingredientInRecipe.recipe = recipe;
     ingredientInRecipe.quantity = quantity;
