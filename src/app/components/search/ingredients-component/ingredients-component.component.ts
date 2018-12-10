@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {Ingredient} from "../../../dataclasses/Ingredient";
 
 /**
@@ -14,8 +14,11 @@ import {Ingredient} from "../../../dataclasses/Ingredient";
 })
 export class IngredientsComponentComponent {
 
+  @Output()
+  registeredIngredients: EventEmitter<Map<Ingredient, AmountInMeasure>> = new EventEmitter();
+
   /** List containing all ingredients the user has added. */
-  private registeredIngredients: Map<Ingredient, AmountInMeasure> = new Map<Ingredient, AmountInMeasure>();
+  private _registeredIngredients: Map<Ingredient, AmountInMeasure> = new Map<Ingredient, AmountInMeasure>();
 
   /**
    * Pushes an ingredient to the array containing all added
@@ -26,12 +29,12 @@ export class IngredientsComponentComponent {
    * @param {Ingredient} ingredient Ingredient to be added.
    */
   onIngredientAdded(ingredient: Ingredient): void {
-    this.registeredIngredients.set(ingredient, undefined);
+    this._registeredIngredients.set(ingredient, undefined);
   }
 
   /**
    * Method to change the amount in a measure of an ingredient. In case of the
-   * amount being 0, the ingredient will be deleted from {@link registeredIngredients}.
+   * amount being 0, the ingredient will be deleted from {@link _registeredIngredients}.
    *
    * @since 12.11.2018
    * @author Lucas Larisch
@@ -40,9 +43,9 @@ export class IngredientsComponentComponent {
    */
   onAmountChanged($event: AmountInMeasure, ingredient: Ingredient): void {
     if ($event.amount === 0) {
-      this.registeredIngredients.delete(ingredient);
+      this._registeredIngredients.delete(ingredient);
     } else {
-      this.registeredIngredients.set(ingredient, $event);
+      this._registeredIngredients.set(ingredient, $event);
     }
   }
 
@@ -54,9 +57,18 @@ export class IngredientsComponentComponent {
    * @returns {Ingredient[]} All added ingredients as array.
    */
   registeredIngredientsAsArray(): Ingredient[] {
-      return Array.from(this.registeredIngredients.keys());
+      return Array.from(this._registeredIngredients.keys());
   }
 
+  /**
+   * Emits the registered ingredients to the output value.
+   *
+   * @since 10.11.2018
+   * @author Lucas Larisch
+   */
+  onSearchRecipes(): void {
+    this.registeredIngredients.emit(this._registeredIngredients);
+  }
 }
 
 /**

@@ -3,6 +3,12 @@
   (addedIngredient)="onIngredientAdded($event)"
 ></app-ingredients-search-component>
 
+<button
+  (click)="onSearchRecipes()"
+  *ngIf="registeredIngredientsAsArray().length > 0">
+  Suchen
+</button>
+
 <ul>
   <app-ingredient-component
     *ngFor="let ingredient of registeredIngredientsAsArray()"
