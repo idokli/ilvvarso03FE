@@ -10,7 +10,7 @@ export class Recipe {
   rate: number;
   difficultyLevel: DifficultyLevel;
   pictureUrl: string;
-  ingredientInRecipe: IngredientInRecipe[];
+  ingredientInRecipes: IngredientInRecipe[];
   identifier: string;
   recipeSite: RecipeSite;
 }

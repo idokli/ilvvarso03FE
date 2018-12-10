@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {IngredientInRecipe} from '../../../dataclasses/IngredientInRecipe';
 import {Ingredient} from '../../../dataclasses/Ingredient';
 
@@ -7,13 +7,17 @@ import {Ingredient} from '../../../dataclasses/Ingredient';
   templateUrl: './lack-ingredients.component.html',
   styleUrls: ['./lack-ingredients.component.css']
 })
-export class LackIngredientsComponent implements OnInit {
+export class LackIngredientsComponent implements OnInit, OnChanges {
 
   @Input() fehlendeZustaten: IngredientInRecipe[];
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(JSON.stringify(this.fehlendeZustaten));
   }
 
 

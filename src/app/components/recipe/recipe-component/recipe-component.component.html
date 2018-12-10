@@ -17,7 +17,7 @@
       </div>
 
       <ng-template #somethingMissing>
-        <div matTooltip="{{fehlendeZustaten}}">{{fehlendeZustaten.length}} Zutaten fehlen</div>
+        <div matTooltip="{{getNamesOf(fehlendeZustaten)}}">{{fehlendeZustaten.length}} Zutaten fehlen</div>
       </ng-template>
 
     </div>

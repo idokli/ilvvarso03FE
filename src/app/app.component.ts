@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Ingredient} from './dataclasses/Ingredient';
+import {AmountInMeasure} from './components/search/ingredients-component/ingredients-component.component';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'ilvvarso03FE';
+
+  searchedIngredients: Map<Ingredient, AmountInMeasure>;
 
   ngOnInit(): void {
     this.declareColors();

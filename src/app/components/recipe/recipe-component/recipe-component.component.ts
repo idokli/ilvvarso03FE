@@ -33,7 +33,7 @@ export class RecipeComponentComponent implements OnInit {
   }
 
   lackIngredients(){
-    for (const ingredientInRecipe of this.recipe.ingredientInRecipe) {
+    for (const ingredientInRecipe of this.recipe.ingredientInRecipes) {
       if(!this.searchedIngredients.includes(ingredientInRecipe.ingredient.name)){
         this.fehlendeZustaten.push(ingredientInRecipe);
       }
@@ -41,4 +41,11 @@ export class RecipeComponentComponent implements OnInit {
   }
 
 
+  getNamesOf(fehlendeZustaten: IngredientInRecipe[]) {
+    var names = [];
+    for (const ingredientInRecipe of fehlendeZustaten) {
+      names.push(ingredientInRecipe.ingredient.name);
+    }
+    return names;
+  }
 }
