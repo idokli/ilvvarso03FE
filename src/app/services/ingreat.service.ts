@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {Recipe} from '../dataclasses/Recipe';
 import {Ingredient} from '../dataclasses/Ingredient';
 import {DifficultyLevel} from '../dataclasses/DifficultyLevel';
 import {IngredientInRecipe} from '../dataclasses/IngredientInRecipe';
 import {from, Observable, of} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Product} from '../dataclasses/Product';
 import {Supermarket} from '../dataclasses/Supermarket';
 import {IngredientsList} from '../dataclasses/IngredientsList';
@@ -12,11 +12,13 @@ import {IngredientsList} from '../dataclasses/IngredientsList';
 @Injectable({
   providedIn: 'root'
 })
-export class IngreatService {
+export class IngreatService{
   private url: string;
+  private ingredients: Ingredient[];
 
   constructor(private http: HttpClient) {
     this.url = 'https://1d61324f.ngrok.io/api/';
+    this.getAllIngredients();
   }
 
   searchIngredients(term: string): Observable<Ingredient[]> {
@@ -25,7 +27,7 @@ export class IngreatService {
     }
     return from(
       [
-        this.mockIngredients().filter(
+        this.ingredients.filter(
           ingredient => ingredient.name.toLowerCase().includes(term.toLowerCase())
         )
       ]
@@ -39,6 +41,16 @@ export class IngreatService {
     var ingredientsList = new IngredientsList(ingredients);
     return this.http.post<any>(this.url + 'getRecipes', ingredientsList);
     // return myObservable;
+  }
+
+  getAllIngredients(){
+    return this.http.get<Ingredient[]>(this.url + 'getAllIngredients').subscribe(data => {
+      // this.ingreatService.reqRecipesByIngredients(searchedIngredients).subscribe( data => {
+      this.ingredients = data;
+    }, (error: HttpErrorResponse) => {
+      console.log(`Backend returned code ${error.status}, body was: ${error.error}`);
+    });
+
   }
 
   reqMeasuresOfIngredient(id: number): Observable<string[]> {
