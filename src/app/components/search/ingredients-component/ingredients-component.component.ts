@@ -67,7 +67,6 @@ export class IngredientsComponentComponent {
    * @author Lucas Larisch
    */
   onSearchRecipes(): void {
-    console.log("emitted searchedIngredients");
     this.registeredIngredients.emit(this._registeredIngredients);
   }
 }

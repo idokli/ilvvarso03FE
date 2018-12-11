@@ -7,7 +7,7 @@ import {Ingredient} from '../../../dataclasses/Ingredient';
   templateUrl: './lack-ingredients.component.html',
   styleUrls: ['./lack-ingredients.component.css']
 })
-export class LackIngredientsComponent implements OnInit, OnChanges {
+export class LackIngredientsComponent implements OnInit {
 
   @Input() fehlendeZustaten: IngredientInRecipe[];
 
@@ -16,9 +16,6 @@ export class LackIngredientsComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(JSON.stringify(this.fehlendeZustaten));
-  }
 
 
 }
