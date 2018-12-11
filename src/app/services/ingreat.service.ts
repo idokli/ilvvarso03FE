@@ -37,7 +37,7 @@ export class IngreatService{
   reqRecipesByIngredients(ingredients: string[]): Observable<any>{
 
     const myObservable = of([this.idoAuflauf(), this.victorSalat(), this.lucasTorte()]);
-    ingredients = ['zitrone', 'sahne', 'kartoffeln'];
+    // ingredients = ['zitrone', 'sahne', 'kartoffeln'];
     var ingredientsList = new IngredientsList(ingredients);
     return this.http.post<any>(this.url + 'getRecipes', ingredientsList);
     // return myObservable;

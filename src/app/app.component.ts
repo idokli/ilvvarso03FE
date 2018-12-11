@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Ingredient} from './dataclasses/Ingredient';
 import {AmountInMeasure} from './components/search/ingredients-component/ingredients-component.component';
 
@@ -7,13 +7,21 @@ import {AmountInMeasure} from './components/search/ingredients-component/ingredi
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit{
   title = 'ilvvarso03FE';
 
-  searchedIngredients: Map<Ingredient, AmountInMeasure>;
+  searchedIngredientsNames: string[];
 
   ngOnInit(): void {
     this.declareColors();
+  }
+
+  extractKeyOfSearchedIngredients(searchedIngredients: Map<Ingredient, AmountInMeasure>){
+    var searchedIngredientsNames = [];
+    searchedIngredients.forEach(function (v,k) {
+      searchedIngredientsNames.push(k.name);
+    });
+    this.searchedIngredientsNames = searchedIngredientsNames;
   }
 
   /**
