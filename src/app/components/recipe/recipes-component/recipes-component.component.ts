@@ -10,9 +10,9 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class RecipesComponentComponent implements OnInit, OnChanges {
 
-  @Input() searchedIngredients: string[];
+  @Input() searchedIngredients: string[] = [];
 
-  recipes: Recipe[];
+  recipes: Recipe[] = [];
 
   constructor( private ingreatService: IngreatService) { }
 
@@ -22,9 +22,7 @@ export class RecipesComponentComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.searchedIngredients.length > 0){
-      console.log("ngChanges");
-
+    if(this.searchedIngredients && this.searchedIngredients.length > 0){
         this.ingreatService.reqRecipesByIngredients(this.searchedIngredients).subscribe( data => {
         this.recipes = data;
       }, (error: HttpErrorResponse) => {
