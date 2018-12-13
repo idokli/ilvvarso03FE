@@ -53,7 +53,9 @@ export class IngreatService{
 
   }
 
-  reqMeasuresOfIngredient(id: number): Observable<string[]> {
+  reqMeasuresOfIngredient(ingredientName: string): Observable<string[]> {
+    //TODO Remove comment when SST in backend will be functional
+    // return this.http.get<string[]>(this.url + 'getMeasures/' + ingredientName);
     return from([['kg','g']]);
   }
 

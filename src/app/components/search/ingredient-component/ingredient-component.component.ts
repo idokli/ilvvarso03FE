@@ -29,7 +29,7 @@ export class IngredientComponentComponent implements OnInit {
    * @since 02.12.2018
    */
   ngOnInit(): void {
-    this.ingreatService.reqMeasuresOfIngredient(this.ingredient.id).subscribe(
+    this.ingreatService.reqMeasuresOfIngredient(this.ingredient.name).subscribe(
       measures => this.measures = measures
     );
   }
