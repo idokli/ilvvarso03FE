@@ -13,7 +13,7 @@ import {IngredientsList} from '../dataclasses/IngredientsList';
   providedIn: 'root'
 })
 export class IngreatService{
-  private url: string;
+  readonly url: string;
   private ingredients: Ingredient[];
 
   constructor(private http: HttpClient) {
@@ -25,32 +25,47 @@ export class IngreatService{
     if (!term.trim()) {
       return of([]);
     }
-    return from(
-      [
-        this.ingredients.filter(
-          ingredient => ingredient.name.toLowerCase().includes(term.toLowerCase())
-        )
-      ]
-    );
+    if (this.ingredients) {
+      return from(
+        [
+          this.ingredients.filter(
+            ingredient => {
+              const iNameLowerCase = ingredient.name.toLowerCase();
+              const termLowerCase = term.toLowerCase();
+              if (iNameLowerCase.includes(termLowerCase)) {
+                const index = iNameLowerCase.indexOf(termLowerCase);
+                return index === 0 || iNameLowerCase.charAt(index - 1).match('\\s');
+              } else {
+                return false;
+              }
+            }
+          )
+        ]
+      );
+    } else {
+      return undefined;
+    }
   }
 
   reqRecipesByIngredients(ingredients: string[]): Observable<any>{
-    var ingredientsList = new IngredientsList(ingredients);
+    const ingredientsList = new IngredientsList(ingredients);
     return this.http.post<any>(this.url + 'getRecipes', ingredientsList);
   }
 
   getAllIngredients(){
     return this.http.get<Ingredient[]>(this.url + 'getAllIngredients').subscribe(data => {
-      // this.ingreatService.reqRecipesByIngredients(searchedIngredients).subscribe( data => {
       this.ingredients = data;
     }, (error: HttpErrorResponse) => {
       console.log(`Backend returned code ${error.status}, body was: ${error.error}`);
     });
-
   }
 
   reqMeasuresOfIngredient(ingredientName: string): Observable<string[]> {
     return this.http.get<string[]>(this.url + 'getMeasures/' + ingredientName);
+  }
+
+  isIngredientsSet(): boolean {
+    return !!this.ingredients;
   }
 
 }
